@@ -1,13 +1,1854 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+  <head>
+    <!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <!-- Your code goes here-->
+    <!-- ============================================================= -->
+    <!--  HEADER                                                       -->
+    <!-- ============================================================= -->
+    <header class="app-header">
+      <h1 class="app-header__title">
+        Determination of Oligomeric Status of a Protein
+      </h1>
+    </header>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
-</body>
+    <!-- ============================================================= -->
+    <!--  TOP-LEVEL STEP NAVIGATION (the three lab steps)              -->
+    <!-- ============================================================= -->
+    <nav class="step-nav" id="stepNav" aria-label="Lab steps">
+      <button class="step-tab is-active" type="button" data-step="0">
+        <span class="step-tab__num">1</span>
+        <span class="step-tab__text"
+          ><b>Determination of denatured Mol. Wt.</b
+          ><small>SDS-PAGE · subunit</small></span
+        >
+      </button>
+      <button class="step-tab" type="button" data-step="1">
+        <span class="step-tab__num">2</span>
+        <span class="step-tab__text"
+          ><b>Determination of native Mol. Wt.</b
+          ><small>Gel filtration · native</small></span
+        >
+      </button>
+      <button class="step-tab" type="button" data-step="2">
+        <span class="step-tab__num">3</span>
+        <span class="step-tab__text"
+          ><b>Oligomeric Status</b><small>n = native / subunit</small></span
+        >
+      </button>
+    </nav>
+
+    <!-- ============================================================= -->
+    <!--  STEP-2 SUB NAVIGATION (only visible while GPC is active)     -->
+    <!-- ============================================================= -->
+    <nav class="sub-nav" id="subNav" aria-label="Procedure sub-steps">
+      <!-- built by JS per step -->
+    </nav>
+
+    <!-- ============================================================= -->
+    <!--  PROGRESS BAR (reflects the active sub-step's timeline)       -->
+    <!-- ============================================================= -->
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Step progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      id="progressRoot"
+    >
+      <div class="progress__fill" id="progressFill"></div>
+      <ul class="progress__ticks" id="progressTicks"></ul>
+    </div>
+
+    <!-- ============================================================= -->
+    <!--  MAIN WORKBENCH                                               -->
+    <!-- ============================================================= -->
+    <main class="workbench">
+      <!-- ---------- LEFT : stacked scenes ---------- -->
+      <section class="scene-stack" aria-label="Laboratory apparatus">
+        <!-- ========================= STEP 1.1 : SDS SAMPLE PREPARATION ========================= -->
+        <div class="scene" data-view="sdsprep" hidden>
+          <svg
+            id="sdsPrepScene"
+            class="lab-svg"
+            viewBox="0 0 820 560"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="SDS-PAGE sample preparation"
+          >
+            <defs>
+              <clipPath id="tubeClip">
+                <path d="M392,238 L392,360 L415,398 L438,360 L438,238 Z" />
+              </clipPath>
+            </defs>
+            <line
+              x1="0"
+              y1="522"
+              x2="820"
+              y2="522"
+              stroke="#d4dde4"
+              stroke-width="2"
+            />
+            <text x="14" y="546" class="svg-watermark">
+              Step 1.1 &middot; Preparing the SDS-PAGE sample
+            </text>
+
+            <!-- reagent pour arrows -->
+            <g id="sdsArrowA" opacity="0">
+              <path
+                d="M300,140 C340,162 372,204 396,236"
+                fill="none"
+                stroke="#b98b52"
+                stroke-width="4"
+                marker-end="url(#arrowTan)"
+              />
+              <text
+                x="292"
+                y="132"
+                class="svg-label"
+                text-anchor="middle"
+                fill="#8a6a3a"
+              >
+                Protein
+              </text>
+              <circle id="sdsDropA" cx="300" cy="140" r="0" fill="#caa46a" />
+            </g>
+            <g id="sdsArrowB" opacity="0">
+              <path
+                d="M530,140 C490,162 458,204 434,236"
+                fill="none"
+                stroke="#3a63c8"
+                stroke-width="4"
+                marker-end="url(#arrowBlue)"
+              />
+              <text
+                x="540"
+                y="132"
+                class="svg-label"
+                text-anchor="middle"
+                fill="#2b4fa0"
+              >
+                Dye (SDS)
+              </text>
+              <circle id="sdsDropB" cx="530" cy="140" r="0" fill="#2b5fd0" />
+            </g>
+
+            <!-- heat waves + glow (over the block, behind the tube) -->
+            <g id="sdsHeat" opacity="0">
+              <ellipse
+                id="sdsHeatGlow"
+                cx="415"
+                cy="398"
+                rx="70"
+                ry="16"
+                fill="#ffb15a"
+                opacity="0.5"
+              />
+              <g id="sdsHeatWaves">
+                <path
+                  d="M398,388 q6,-14 0,-28 q-6,-14 0,-28"
+                  fill="none"
+                  stroke="#f2a95c"
+                  stroke-width="2.4"
+                  opacity="0.85"
+                />
+                <path
+                  d="M415,388 q6,-14 0,-28 q-6,-14 0,-28"
+                  fill="none"
+                  stroke="#f2a95c"
+                  stroke-width="2.4"
+                  opacity="0.85"
+                />
+                <path
+                  d="M432,388 q6,-14 0,-28 q-6,-14 0,-28"
+                  fill="none"
+                  stroke="#f2a95c"
+                  stroke-width="2.4"
+                  opacity="0.85"
+                />
+              </g>
+            </g>
+
+            <!-- the sample tube (sits in the heating block) -->
+            <g
+              id="sdsTube"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Sample Tube"
+              data-info="Protein and SDS loading dye are mixed in the tube, heated to 95 °C to denature, then centrifuged. The blue supernatant is the ready-to-load sample."
+            >
+              <path
+                d="M388,236 L388,360 L415,400 L442,360 L442,236 Q442,228 434,228 L396,228 Q388,228 388,236 Z"
+                fill="url(#gradGlass)"
+                stroke="#8fa6b4"
+                stroke-width="2"
+              />
+              <g clip-path="url(#tubeClip)">
+                <rect
+                  id="sdsLiquid"
+                  x="392"
+                  y="398"
+                  width="46"
+                  height="0"
+                  fill="#d9c79b"
+                />
+                <ellipse
+                  id="sdsPellet"
+                  cx="415"
+                  cy="392"
+                  rx="10"
+                  ry="4"
+                  fill="#1c2b46"
+                  opacity="0"
+                />
+                <g id="sdsBubbles"></g>
+              </g>
+              <rect
+                x="384"
+                y="224"
+                width="62"
+                height="9"
+                rx="4"
+                fill="#c3d0d9"
+                stroke="#9fb4c2"
+              />
+            </g>
+
+            <!-- spin arcs (centrifuge step) -->
+            <g id="sdsSpin" opacity="0">
+              <path
+                d="M356,290 A62,62 0 0 1 415,232"
+                fill="none"
+                stroke="#5a7686"
+                stroke-width="3.5"
+                marker-end="url(#arrowGrey)"
+              />
+              <path
+                d="M474,290 A62,62 0 0 1 415,348"
+                fill="none"
+                stroke="#5a7686"
+                stroke-width="3.5"
+                marker-end="url(#arrowGrey)"
+              />
+            </g>
+
+            <!-- heating block (dry block heater) -->
+            <g
+              id="sdsBlock"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Heating Block (95 °C)"
+              data-info="A dry heating block holds the tube at 95 °C. Heating with SDS and reducing agent fully denatures the protein into its subunits."
+            >
+              <rect
+                x="288"
+                y="400"
+                width="254"
+                height="86"
+                rx="12"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="2"
+                filter="url(#softShadow)"
+              />
+              <rect
+                x="300"
+                y="388"
+                width="230"
+                height="18"
+                rx="4"
+                fill="#5c6b78"
+              />
+              <ellipse cx="415" cy="397" rx="22" ry="6" fill="#22303a" />
+              <circle cx="345" cy="397" r="6" fill="#3a4855" />
+              <circle cx="485" cy="397" r="6" fill="#3a4855" />
+              <!-- digital display -->
+              <rect
+                x="452"
+                y="430"
+                width="74"
+                height="34"
+                rx="5"
+                fill="#0d1c24"
+              />
+              <text x="489" y="454" text-anchor="middle" class="heat-readout">
+                95 °C
+              </text>
+              <text x="330" y="452" class="svg-label" fill="#e9eef3">
+                Heating block
+              </text>
+            </g>
+
+            <!-- ready check -->
+            <g id="sdsReady" opacity="0">
+              <circle cx="560" cy="230" r="22" fill="#2faf6b" />
+              <path
+                d="M550,230 l7,7 l14,-16"
+                fill="none"
+                stroke="#fff"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <text
+                x="560"
+                y="272"
+                class="svg-label"
+                text-anchor="middle"
+                fill="#1f8a52"
+              >
+                Blue sample ready
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 1.2 : GEL RUN ========================= -->
+        <div class="scene" data-view="sdsrun" hidden>
+          <svg
+            id="gelScene"
+            class="sds-gel"
+            viewBox="0 0 360 470"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="SDS-PAGE gel"
+          >
+            <text x="180" y="24" text-anchor="middle" class="calib-title">
+              Vertical slab gel — SDS-PAGE
+            </text>
+            <text x="24" y="70" class="gel-electrode">− cathode</text>
+            <text x="24" y="452" class="gel-electrode">+ anode</text>
+            <rect
+              x="70"
+              y="78"
+              width="240"
+              height="356"
+              rx="6"
+              fill="#e7edf1"
+              stroke="#c2cfd8"
+              stroke-width="2"
+            />
+            <rect x="102" y="82" width="56" height="12" rx="2" fill="#cdd8df" />
+            <rect x="222" y="82" width="56" height="12" rx="2" fill="#cdd8df" />
+            <text x="130" y="450" text-anchor="middle" class="gel-lane-label">
+              Marker
+            </text>
+            <text x="250" y="450" text-anchor="middle" class="gel-lane-label">
+              Unknown protein
+            </text>
+            <line
+              id="gelDye"
+              x1="76"
+              y1="96"
+              x2="304"
+              y2="96"
+              class="gel-dye"
+            />
+            <g id="gelMarker"></g>
+            <g id="gelSample"></g>
+            <g id="gelVolt">
+              <rect
+                id="gelVoltBadge"
+                x="256"
+                y="58"
+                width="60"
+                height="20"
+                rx="10"
+                fill="#0f2c3c"
+                opacity="0"
+              />
+              <text
+                id="gelVoltText"
+                x="286"
+                y="72"
+                text-anchor="middle"
+                class="gel-volt-text"
+                opacity="0"
+              >
+                120 V
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 1.3 : DETERMINATION OF MW (graph + formula) ========================= -->
+        <div class="scene" data-view="sdsdetermine" hidden>
+          <div class="det-wrap">
+            <svg
+              id="rfGraph"
+              class="calib"
+              viewBox="0 0 360 440"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Rf vs log MW calibration"
+            >
+              <text x="180" y="24" text-anchor="middle" class="calib-title">
+                R&#8202;f vs log(MW)
+              </text>
+              <g id="rfGrid"></g>
+              <line x1="70" y1="60" x2="70" y2="380" class="chart-axis" />
+              <line x1="70" y1="380" x2="330" y2="380" class="chart-axis" />
+              <text x="200" y="418" text-anchor="middle" class="chart-label">
+                log (Molecular weight)
+              </text>
+              <text
+                x="24"
+                y="220"
+                text-anchor="middle"
+                class="chart-label"
+                transform="rotate(-90 24 220)"
+              >
+                Relative mobility (Rf)
+              </text>
+              <g id="rfLine"></g>
+              <g id="rfPoints"></g>
+              <g id="rfUnknown"></g>
+            </svg>
+            <div class="det-formulas" id="sdsFormula"><!-- built by JS --></div>
+          </div>
+        </div>
+
+        <!-- ========================= STEP 2.1 : COLUMN PACKING ========================= -->
+        <div class="scene" data-view="packing">
+          <svg
+            id="packScene"
+            class="lab-svg"
+            viewBox="0 0 820 560"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Column packing apparatus"
+          >
+            <line
+              x1="0"
+              y1="522"
+              x2="820"
+              y2="522"
+              stroke="#d4dde4"
+              stroke-width="2"
+            />
+            <text x="14" y="546" class="svg-watermark">
+              Step 2.1 &middot; Packing the gel-filtration column
+            </text>
+
+            <g
+              id="beaker"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Gel Slurry"
+              data-info="The dry matrix beads are swollen in the mobile phase to form a pourable slurry. Swelling fully hydrates the porous beads before packing."
+            >
+              <path
+                d="M118,250 L298,250 L286,432 Q285,444 273,444 L143,444 Q131,444 130,432 Z"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p1Slurry"
+                x="132"
+                y="300"
+                width="152"
+                height="140"
+                rx="4"
+                fill="url(#gradSlurry)"
+                opacity="0.9"
+              />
+              <rect
+                id="p1SlurryBeads"
+                x="132"
+                y="300"
+                width="152"
+                height="140"
+                fill="url(#patBeadsSm)"
+                opacity="0.5"
+              />
+              <ellipse
+                id="p1SlurrySurf"
+                cx="208"
+                cy="300"
+                rx="76"
+                ry="6"
+                fill="#cdeede"
+                opacity="0.85"
+              />
+              <text x="208" y="470" class="svg-label" text-anchor="middle">
+                Gel slurry
+              </text>
+            </g>
+
+            <g id="p1PourGroup" class="tubing">
+              <path
+                id="p1Pour"
+                class="tube-flow pour-stream"
+                d="M292,258 C360,250 470,150 566,112"
+              />
+            </g>
+            <line
+              x1="300"
+              y1="248"
+              x2="574"
+              y2="110"
+              stroke="#cfe0ea"
+              stroke-width="4"
+              stroke-linecap="round"
+              opacity="0.7"
+            />
+
+            <g
+              id="p1Column"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Gel-Filtration Column"
+              data-info="A glass column packed with porous gel beads. Even, air-free packing is essential — channels or bubbles cause band spreading and poor resolution."
+            >
+              <path
+                d="M542,72 L630,72 L604,104 L568,104 Z"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="1.6"
+              />
+              <rect
+                id="p1Bed"
+                x="546"
+                y="452"
+                width="80"
+                height="0"
+                fill="url(#patBeads)"
+              />
+              <rect
+                id="p1Liquid"
+                x="546"
+                y="150"
+                width="80"
+                height="0"
+                fill="url(#gradLiquid)"
+                opacity="0.5"
+              />
+              <g id="p1Bubbles"></g>
+              <rect
+                id="p1Band"
+                x="548"
+                y="150"
+                width="76"
+                height="0"
+                rx="3"
+                fill="url(#gradBlue)"
+                opacity="0"
+              />
+              <rect
+                x="542"
+                y="104"
+                width="88"
+                height="7"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="542"
+                y="452"
+                width="88"
+                height="7"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="542"
+                y="104"
+                width="88"
+                height="355"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#8fa6b4"
+                stroke-width="2"
+              />
+              <path d="M586,459 L586,486" stroke="#9fb4c2" stroke-width="4" />
+              <circle
+                cx="586"
+                cy="474"
+                r="6"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="1.4"
+              />
+              <text x="586" y="98" class="svg-label" text-anchor="middle">
+                Column
+              </text>
+              <text x="642" y="200" class="svg-tag" id="p1TagVo">V&#8338;</text>
+              <text x="642" y="360" class="svg-tag" id="p1TagVi">V&#7522;</text>
+            </g>
+
+            <g id="p1Waste">
+              <path
+                d="M556,494 L616,494 L610,528 Q609,534 603,534 L569,534 Q563,534 562,528 Z"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="1.6"
+              />
+              <rect
+                id="p1WasteLiquid"
+                x="562"
+                y="520"
+                width="52"
+                height="0"
+                rx="2"
+                fill="#bfe0f2"
+                opacity="0.85"
+              />
+            </g>
+
+            <g id="p1Result" opacity="0">
+              <rect
+                x="120"
+                y="120"
+                width="270"
+                height="86"
+                rx="12"
+                fill="#0f2c3c"
+              />
+              <text x="136" y="150" class="result-title">
+                Packing test &mdash; Kd = 1 marker
+              </text>
+              <text x="136" y="176" class="result-line">
+                Vₑ = Vₒ + Vᵢ &nbsp;→&nbsp; elutes as expected
+              </text>
+              <text x="136" y="196" class="result-ok">
+                ✓ Column evenly packed, no air channels
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 2.2 : SAMPLE PREPARATION ========================= -->
+        <div class="scene" data-view="prep" hidden>
+          <svg
+            id="prepScene"
+            class="lab-svg"
+            viewBox="0 0 820 560"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Sample preparation apparatus"
+          >
+            <line
+              x1="0"
+              y1="522"
+              x2="820"
+              y2="522"
+              stroke="#d4dde4"
+              stroke-width="2"
+            />
+            <text x="14" y="546" class="svg-watermark">
+              Step 2.2 &middot; Preparing a clarified sample
+            </text>
+
+            <!-- flow arrows between stations -->
+            <path
+              d="M214,346 L286,346"
+              fill="none"
+              stroke="#9fb4c2"
+              stroke-width="4"
+              marker-end="url(#arrow)"
+            />
+            <path
+              d="M468,402 L512,402"
+              fill="none"
+              stroke="#9fb4c2"
+              stroke-width="4"
+              marker-end="url(#arrow)"
+            />
+
+            <!-- 1) sample vial -->
+            <g
+              id="p2Vial"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Protein Sample"
+              data-info="The protein is dissolved in the mobile phase (the same buffer used to elute), so the sample and eluent are chemically matched."
+            >
+              <rect
+                x="110"
+                y="250"
+                width="90"
+                height="182"
+                rx="10"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p2VialLiquid"
+                x="116"
+                y="430"
+                width="78"
+                height="0"
+                rx="6"
+                fill="#caa46a"
+                opacity="0.85"
+              />
+              <g id="p2Cloud"></g>
+              <g id="p2Dropper">
+                <rect
+                  x="146"
+                  y="196"
+                  width="18"
+                  height="44"
+                  rx="4"
+                  fill="#eaf1f6"
+                  stroke="#9fb4c2"
+                  stroke-width="1.4"
+                />
+                <rect
+                  x="151"
+                  y="184"
+                  width="8"
+                  height="16"
+                  rx="3"
+                  fill="#c44"
+                />
+                <circle
+                  id="p2DropperDrop"
+                  cx="155"
+                  cy="246"
+                  r="0"
+                  fill="#7fd1ff"
+                />
+              </g>
+              <text x="155" y="452" class="svg-label" text-anchor="middle">
+                Sample
+              </text>
+            </g>
+
+            <!-- 2) syringe filter -->
+            <g
+              id="p2Syringe"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Syringe Filter"
+              data-info="Suspended particles are removed by pushing the sample through a membrane filter. Particulates would otherwise clog the column and ruin the packing."
+            >
+              <rect
+                x="300"
+                y="165"
+                width="56"
+                height="150"
+                rx="6"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p2BarrelSample"
+                x="305"
+                y="175"
+                width="46"
+                height="140"
+                rx="3"
+                fill="#caa46a"
+                opacity="0.8"
+              />
+              <g id="p2Plunger">
+                <rect
+                  x="323"
+                  y="126"
+                  width="10"
+                  height="46"
+                  rx="3"
+                  fill="#cbd5dd"
+                  stroke="#9fb4c2"
+                  stroke-width="1"
+                />
+                <rect
+                  x="308"
+                  y="118"
+                  width="40"
+                  height="9"
+                  rx="3"
+                  fill="#c44"
+                />
+              </g>
+              <path
+                d="M310,315 L346,315 L339,340 L317,340 Z"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="1.6"
+              />
+              <rect
+                id="p2FilterCake"
+                x="315"
+                y="322"
+                width="26"
+                height="6"
+                rx="2"
+                fill="#8a5a3a"
+                opacity="0"
+              />
+              <path d="M328,340 L328,360" stroke="#9fb4c2" stroke-width="3" />
+              <circle id="p2Drop" cx="328" cy="366" r="0" fill="#bfe0e8" />
+              <text
+                x="328"
+                y="120"
+                class="svg-label"
+                text-anchor="middle"
+                dy="-4"
+              >
+                Filter
+              </text>
+            </g>
+
+            <!-- 3) clarified collection tube -->
+            <g
+              id="p2Clean"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Clarified Sample"
+              data-info="The clear filtrate — free of particulates — is collected. This is the injection-ready sample for the column."
+            >
+              <path
+                d="M304,366 L352,366 L346,452 Q345,460 337,460 L319,460 Q311,460 310,452 Z"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p2Filtrate"
+                x="310"
+                y="450"
+                width="36"
+                height="0"
+                rx="3"
+                fill="#d9c79b"
+                opacity="0.8"
+              />
+            </g>
+
+            <!-- 4) injection syringe -->
+            <g id="p2LoadSyringe" opacity="0">
+              <rect
+                x="520"
+                y="250"
+                width="56"
+                height="150"
+                rx="6"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p2LoadSample"
+                x="525"
+                y="400"
+                width="46"
+                height="0"
+                rx="3"
+                fill="#d9c79b"
+                opacity="0.85"
+              />
+              <g id="p2LoadPlunger">
+                <rect
+                  x="543"
+                  y="206"
+                  width="10"
+                  height="48"
+                  rx="3"
+                  fill="#cbd5dd"
+                  stroke="#9fb4c2"
+                  stroke-width="1"
+                />
+                <rect
+                  x="528"
+                  y="198"
+                  width="40"
+                  height="9"
+                  rx="3"
+                  fill="#c44"
+                />
+              </g>
+              <path d="M548,400 L548,428" stroke="#9fb4c2" stroke-width="3" />
+              <text
+                x="548"
+                y="248"
+                class="svg-label"
+                text-anchor="middle"
+                dy="-4"
+              >
+                Injection syringe
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 2.3 : RUNNING OF SAMPLES ========================= -->
+        <div class="scene" data-view="running" hidden>
+          <svg
+            id="lab"
+            class="lab-svg"
+            viewBox="0 0 820 560"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Gel filtration chromatography apparatus"
+          >
+            <g id="bench">
+              <rect x="0" y="0" width="820" height="560" fill="transparent" />
+              <line
+                x1="0"
+                y1="520"
+                x2="820"
+                y2="520"
+                stroke="#d4dde4"
+                stroke-width="2"
+              />
+              <text x="14" y="544" class="svg-watermark">
+                Step 2.3 &middot; Running standards &amp; the unknown, one by
+                one
+              </text>
+            </g>
+
+            <!-- active-sample chip -->
+            <g id="runChip">
+              <rect
+                id="runChipBg"
+                x="44"
+                y="16"
+                width="230"
+                height="34"
+                rx="17"
+                fill="#0f2c3c"
+              />
+              <circle id="runChipDot" cx="66" cy="33" r="7" fill="#2f6fdb" />
+              <text id="runChipText" x="82" y="38" class="run-chip-text">
+                Blue Dextran
+              </text>
+            </g>
+
+            <g
+              id="reservoir"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Mobile-Phase Reservoir"
+              data-info="Buffer (eluent) reservoir. The pump draws mobile phase from here to carry each sample through the column at a constant flow rate."
+            >
+              <rect
+                x="44"
+                y="70"
+                width="104"
+                height="98"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="reservoirLiquid"
+                x="48"
+                y="92"
+                width="96"
+                height="72"
+                rx="5"
+                fill="url(#gradLiquid)"
+                opacity="0.85"
+              />
+              <ellipse
+                cx="96"
+                cy="92"
+                rx="48"
+                ry="6"
+                fill="#bfeaff"
+                opacity="0.85"
+              />
+              <text x="96" y="184" class="svg-label" text-anchor="middle">
+                Eluent
+              </text>
+            </g>
+
+            <g class="tubing" data-flow="t1">
+              <path class="tube-base" d="M96,168 C96,210 150,210 188,118" />
+              <path
+                class="tube-flow"
+                id="flowT1"
+                d="M96,168 C96,210 150,210 188,118"
+              />
+            </g>
+
+            <g
+              id="pump"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="HPLC Pump"
+              data-info="Constant-flow pump. No salt gradient is used in gel filtration — the flow of mobile phase alone elutes each sample."
+            >
+              <circle
+                cx="222"
+                cy="104"
+                r="38"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="2"
+                filter="url(#softShadow)"
+              />
+              <circle cx="222" cy="104" r="27" fill="#22455c" />
+              <g id="pumpRotor">
+                <rect
+                  x="219"
+                  y="82"
+                  width="6"
+                  height="44"
+                  rx="3"
+                  fill="#9fe0ff"
+                />
+                <rect
+                  x="200"
+                  y="101"
+                  width="44"
+                  height="6"
+                  rx="3"
+                  fill="#9fe0ff"
+                />
+              </g>
+              <circle cx="222" cy="104" r="5" fill="#0d2533" />
+              <text x="222" y="158" class="svg-label" text-anchor="middle">
+                Pump
+              </text>
+            </g>
+
+            <g class="tubing" data-flow="t2">
+              <path class="tube-base" d="M260,104 L322,104" />
+              <path class="tube-flow" id="flowT2" d="M260,104 L322,104" />
+            </g>
+
+            <g
+              id="syringe"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Sample Injector"
+              data-info="Each sample (Blue Dextran, the standards, then the unknown) is injected in turn as a sharp band at the top of the column."
+            >
+              <rect
+                x="342"
+                y="20"
+                width="26"
+                height="40"
+                rx="3"
+                fill="#ffffff"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <g id="syringePlunger">
+                <rect x="350" y="2" width="10" height="24" rx="2" fill="#c44" />
+                <rect x="346" y="0" width="18" height="6" rx="2" fill="#a33" />
+              </g>
+              <rect
+                id="syringeSample"
+                x="346"
+                y="44"
+                width="18"
+                height="14"
+                rx="2"
+                fill="#c0504d"
+                opacity="0.9"
+              />
+              <path d="M355,60 L355,82" stroke="#9fb4c2" stroke-width="3" />
+            </g>
+
+            <g
+              id="valve"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Injection Valve"
+              data-info="Switches the injected sample onto the column so the mobile phase sweeps it through the packed bed."
+            >
+              <circle
+                cx="355"
+                cy="104"
+                r="24"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="2"
+              />
+              <g id="valveRotor">
+                <rect
+                  x="351"
+                  y="86"
+                  width="8"
+                  height="36"
+                  rx="4"
+                  fill="#22455c"
+                />
+              </g>
+              <circle cx="355" cy="104" r="4" fill="#0d2533" />
+              <text x="355" y="150" class="svg-label" text-anchor="middle">
+                Injector
+              </text>
+            </g>
+
+            <g class="tubing" data-flow="t3">
+              <path class="tube-base" d="M355,128 L355,150 L427,150 L427,158" />
+              <path
+                class="tube-flow"
+                id="flowT3"
+                d="M355,128 L355,150 L427,150 L427,158"
+              />
+            </g>
+
+            <g
+              id="column"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Chromatography Column"
+              data-info="Glass column packed with porous gel beads. Large molecules are excluded from the pores and elute first (small Vₑ); small molecules diffuse into the pores and elute later (large Vₑ)."
+            >
+              <rect
+                x="394"
+                y="158"
+                width="66"
+                height="248"
+                rx="6"
+                fill="url(#patBeads)"
+              />
+              <rect
+                x="394"
+                y="158"
+                width="66"
+                height="8"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="394"
+                y="398"
+                width="66"
+                height="8"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="394"
+                y="150"
+                width="66"
+                height="256"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#8fa6b4"
+                stroke-width="2"
+              />
+              <rect
+                id="sampleBand"
+                x="397"
+                y="170"
+                width="60"
+                height="0"
+                rx="3"
+                fill="#b5532f"
+                opacity="0"
+              />
+              <text x="427" y="146" class="svg-label" text-anchor="middle">
+                Column
+              </text>
+              <text x="468" y="180" class="svg-tag" id="tagVoid">V&#8338;</text>
+              <text x="468" y="300" class="svg-tag" id="tagPore">V&#7522;</text>
+            </g>
+
+            <g id="moleculeLayer"></g>
+
+            <g
+              id="detector"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Detector (UV / RI)"
+              data-info="Detector at the column outlet. It records the concentration of each eluting band as a peak on the chromatogram at that sample's elution volume."
+            >
+              <rect
+                x="384"
+                y="412"
+                width="86"
+                height="58"
+                rx="8"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="2"
+                filter="url(#softShadow)"
+              />
+              <rect
+                x="396"
+                y="424"
+                width="62"
+                height="34"
+                rx="4"
+                fill="#0d2533"
+              />
+              <rect
+                x="421"
+                y="406"
+                width="12"
+                height="70"
+                fill="#2f9bdb"
+                opacity="0.25"
+              />
+              <circle
+                id="detectorGlow"
+                cx="427"
+                cy="441"
+                r="22"
+                fill="url(#gradGlow)"
+                opacity="0"
+              />
+              <circle
+                id="detectorLamp"
+                cx="412"
+                cy="441"
+                r="5"
+                fill="#3a5666"
+              />
+              <circle cx="442" cy="441" r="3" fill="#7fd1ff" />
+              <text x="427" y="490" class="svg-label" text-anchor="middle">
+                Detector
+              </text>
+            </g>
+
+            <g class="tubing" data-flow="t4">
+              <path class="tube-base" d="M427,470 L427,486 L520,486" />
+              <path
+                class="tube-flow"
+                id="flowT4"
+                d="M427,470 L427,486 L520,486"
+              />
+            </g>
+
+            <g id="nozzle">
+              <path
+                d="M0,-8 L12,-8 L8,4 L4,4 Z"
+                fill="#9fb4c2"
+                transform="translate(-6,0)"
+              />
+              <circle id="nozzleDrop" cx="0" cy="8" r="0" fill="#b5532f" />
+            </g>
+
+            <g
+              id="collector"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Fraction Collector"
+              data-info="Each run is collected in its own tube: F1 Blue Dextran, F2–F4 the standards, F5 the unknown."
+            >
+              <rect
+                x="498"
+                y="528"
+                width="296"
+                height="14"
+                rx="4"
+                fill="#cdd7de"
+                stroke="#aab6bf"
+              />
+              <g id="tubeRack"></g>
+              <text x="646" y="556" class="svg-label" text-anchor="middle">
+                Fraction Collector
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 2.4 : DETERMINATION OF MW ========================= -->
+        <div class="scene" data-view="determination" hidden>
+          <div class="det-wrap">
+            <svg
+              id="calibGraph"
+              class="calib"
+              viewBox="0 0 560 440"
+              preserveAspectRatio="xMidYMid meet"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Calibration curve"
+            >
+              <text x="280" y="26" text-anchor="middle" class="calib-title">
+                Calibration curve — Kₐᵥ vs log(MW)
+              </text>
+              <!-- plot frame -->
+              <g id="calibGrid"></g>
+              <line x1="80" y1="60" x2="80" y2="380" class="chart-axis" />
+              <line x1="80" y1="380" x2="520" y2="380" class="chart-axis" />
+              <text x="300" y="418" text-anchor="middle" class="chart-label">
+                log (Molecular weight)
+              </text>
+              <text
+                x="26"
+                y="220"
+                text-anchor="middle"
+                class="chart-label"
+                transform="rotate(-90 26 220)"
+              >
+                Kₐᵥ
+              </text>
+              <g id="calibLine"></g>
+              <g id="calibPoints"></g>
+              <g id="calibUnknown"></g>
+            </svg>
+            <div class="det-formulas" id="detFormulas">
+              <!-- filled by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================= STEP 2.5 : COLUMN REGENERATION ========================= -->
+        <div class="scene" data-view="regen" hidden>
+          <svg
+            id="regenScene"
+            class="lab-svg"
+            viewBox="0 0 820 560"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Column regeneration apparatus"
+          >
+            <line
+              x1="0"
+              y1="522"
+              x2="820"
+              y2="522"
+              stroke="#d4dde4"
+              stroke-width="2"
+            />
+            <text x="14" y="546" class="svg-watermark">
+              Step 2.5 &middot; Washing, re-equilibration &amp; storage
+            </text>
+
+            <g
+              id="p4Reservoir"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Wash / Mobile Phase"
+              data-info="First a salt-containing mobile phase strips non-specifically bound protein; then plain mobile phase re-equilibrates the column for the next separation."
+            >
+              <rect
+                x="70"
+                y="60"
+                width="120"
+                height="96"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="2"
+              />
+              <rect
+                id="p4ResLiquid"
+                x="74"
+                y="84"
+                width="112"
+                height="68"
+                rx="5"
+                fill="url(#gradSalt)"
+                opacity="0.85"
+              />
+              <ellipse
+                cx="130"
+                cy="84"
+                rx="56"
+                ry="6"
+                fill="#dfeafc"
+                opacity="0.85"
+              />
+              <text
+                id="p4ResLabel"
+                x="130"
+                y="176"
+                class="svg-label"
+                text-anchor="middle"
+              >
+                Salt buffer
+              </text>
+            </g>
+
+            <g class="tubing" id="p4InTube">
+              <path class="tube-base" d="M130,156 C130,210 300,200 388,150" />
+              <path class="tube-flow" d="M130,156 C130,210 300,200 388,150" />
+            </g>
+
+            <g
+              id="p4Column"
+              class="apparatus"
+              tabindex="0"
+              role="button"
+              data-label="Packed Column"
+              data-info="After a run, some protein clings non-specifically to the matrix. Washing and re-equilibration return the column to a clean, reusable state."
+            >
+              <rect
+                x="388"
+                y="150"
+                width="74"
+                height="256"
+                rx="6"
+                fill="url(#patBeads)"
+              />
+              <rect
+                id="p4Liquid"
+                x="388"
+                y="158"
+                width="74"
+                height="0"
+                fill="url(#gradLiquid)"
+                opacity="0.4"
+              />
+              <g id="p4Adsorbed"></g>
+              <rect
+                x="388"
+                y="150"
+                width="74"
+                height="8"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="388"
+                y="398"
+                width="74"
+                height="8"
+                fill="#cfd8de"
+                stroke="#aab6bf"
+                stroke-width="0.8"
+              />
+              <rect
+                x="388"
+                y="150"
+                width="74"
+                height="256"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#8fa6b4"
+                stroke-width="2"
+              />
+              <path d="M425,406 L425,436" stroke="#9fb4c2" stroke-width="4" />
+              <text x="425" y="146" class="svg-label" text-anchor="middle">
+                Column
+              </text>
+              <rect
+                id="p4Cap"
+                x="404"
+                y="132"
+                width="42"
+                height="14"
+                rx="4"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="1.4"
+                opacity="0"
+              />
+            </g>
+
+            <g class="tubing" id="p4OutTube">
+              <path class="tube-base" d="M425,436 L425,470" />
+              <path class="tube-flow" d="M425,436 L425,470" />
+            </g>
+
+            <g id="p4Waste">
+              <path
+                d="M392,474 L458,474 L451,520 Q450,528 442,528 L408,528 Q400,528 399,520 Z"
+                fill="url(#gradGlass)"
+                stroke="#9fb4c2"
+                stroke-width="1.6"
+              />
+              <rect
+                id="p4WasteLiquid"
+                x="400"
+                y="512"
+                width="50"
+                height="0"
+                rx="2"
+                fill="#bfe0f2"
+                opacity="0.85"
+              />
+              <text
+                x="425"
+                y="512"
+                class="svg-label"
+                text-anchor="middle"
+                font-size="10"
+              >
+                Waste
+              </text>
+            </g>
+
+            <g id="p4Fridge" opacity="0">
+              <rect
+                x="560"
+                y="150"
+                width="210"
+                height="260"
+                rx="16"
+                fill="#eaf4fb"
+                stroke="#9fc2dd"
+                stroke-width="2"
+              />
+              <rect
+                x="560"
+                y="150"
+                width="210"
+                height="46"
+                rx="16"
+                fill="#d5eaf7"
+                stroke="#9fc2dd"
+                stroke-width="2"
+              />
+              <text
+                x="665"
+                y="180"
+                class="svg-label"
+                text-anchor="middle"
+                fill="#1d6fa5"
+              >
+                ❄ Cold Room · 4 °C
+              </text>
+              <rect
+                x="636"
+                y="228"
+                width="58"
+                height="150"
+                rx="8"
+                fill="url(#patBeads)"
+              />
+              <rect
+                x="636"
+                y="228"
+                width="58"
+                height="150"
+                rx="8"
+                fill="url(#gradGlass)"
+                stroke="#8fa6b4"
+                stroke-width="2"
+              />
+              <rect
+                x="648"
+                y="216"
+                width="34"
+                height="14"
+                rx="4"
+                fill="url(#gradMetal)"
+                stroke="#7d8c99"
+                stroke-width="1.2"
+              />
+              <rect
+                x="578"
+                y="330"
+                width="174"
+                height="62"
+                rx="10"
+                fill="#ffffff"
+                stroke="#cfe0ea"
+              />
+              <text x="590" y="352" class="store-line">20% ethanol</text>
+              <text x="590" y="370" class="store-line">0.05% sodium azide</text>
+              <text x="590" y="388" class="store-line">stored at 4 °C</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ========================= STEP 3 : OLIGOMERIC STATUS ========================= -->
+        <div class="scene" data-view="oligo" hidden>
+          <div class="formula-stage" id="oligoStage"><!-- filled by JS --></div>
+        </div>
+
+        <!-- floating tooltip -->
+        <div
+          class="tooltip"
+          id="tooltip"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+      </section>
+
+      <!-- ---------- RIGHT : information panels ---------- -->
+      <aside class="panels">
+        <div class="panel panel--instructions">
+          <h2 class="panel__title">
+            <span class="panel__icon">&#9776;</span> Instructions
+          </h2>
+          <p class="panel__step" id="instructionText">
+            Welcome. This lab determines a protein's
+            <strong>oligomeric status</strong> by comparing its native MW (gel
+            filtration) with its subunit MW (SDS-PAGE). Use the step tabs above.
+          </p>
+          <button
+            class="action-hint"
+            id="actionHint"
+            type="button"
+            hidden
+          ></button>
+        </div>
+
+        <div class="panel panel--chart" id="chartPanel">
+          <h2 class="panel__title">
+            <span class="panel__icon">&#128202;</span> Chromatogram
+          </h2>
+          <p class="chart-caption" id="chartCaption">Detector trace</p>
+          <svg
+            id="chart"
+            viewBox="0 0 300 180"
+            preserveAspectRatio="none"
+            class="chart"
+          >
+            <g id="chartGrid"></g>
+            <line x1="38" y1="150" x2="292" y2="150" class="chart-axis" />
+            <line x1="38" y1="12" x2="38" y2="150" class="chart-axis" />
+            <path
+              id="chartLargeArea"
+              class="chart-area chart-area--large"
+              d=""
+            />
+            <path
+              id="chartNormalArea"
+              class="chart-area chart-area--normal"
+              d=""
+            />
+            <path
+              id="chartSmallArea"
+              class="chart-area chart-area--small"
+              d=""
+            />
+            <g id="chartRuns"></g>
+            <path id="chartTrace" class="chart-trace" d="" />
+            <line
+              id="chartCursor"
+              class="chart-cursor"
+              x1="38"
+              y1="12"
+              x2="38"
+              y2="150"
+            />
+            <text x="165" y="174" class="chart-label" text-anchor="middle">
+              Elution volume (mL) &#8594;
+            </text>
+            <text
+              x="12"
+              y="80"
+              class="chart-label"
+              text-anchor="middle"
+              transform="rotate(-90 12 80)"
+            >
+              Signal
+            </text>
+          </svg>
+          <div class="chart-legend" id="chartLegend"></div>
+        </div>
+
+        <div class="panel panel--observation">
+          <h2 class="panel__title">
+            <span class="panel__icon">&#128300;</span> Observations
+          </h2>
+          <ul class="observation-log" id="observationLog"></ul>
+        </div>
+      </aside>
+    </main>
+
+    <!-- ============================================================= -->
+    <!--  CONTROL DOCK                                                 -->
+    <!-- ============================================================= -->
+    <footer class="controls" aria-label="Experiment controls">
+      <div class="controls__group controls__group--transport">
+        <button class="btn" id="btnPrev" type="button" title="Previous step">
+          &#9198; Prev
+        </button>
+        <button class="btn btn--primary" id="btnStart" type="button">
+          &#9654; Start
+        </button>
+        <button class="btn" id="btnPause" type="button" disabled>
+          &#10073;&#10073; Pause
+        </button>
+        <button class="btn" id="btnNext" type="button" title="Next step">
+          Next &#9197;
+        </button>
+        <button class="btn btn--ghost" id="btnReset" type="button">
+          &#8635; Reset
+        </button>
+      </div>
+      <div class="controls__group controls__group--speed">
+        <label for="speed" class="controls__speed-label">Speed</label>
+        <input
+          type="range"
+          id="speed"
+          min="0.25"
+          max="3"
+          step="0.25"
+          value="1"
+        />
+        <output id="speedOut" class="controls__speed-out">1.0&times;</output>
+      </div>
+    </footer>
+
+    <!-- ============================================================= -->
+    <!--  SHARED SVG DEFINITIONS                                       -->
+    <!-- ============================================================= -->
+    <svg
+      class="svg-defs"
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <linearGradient id="gradLiquid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7fd1ff" />
+          <stop offset="100%" stop-color="#2f9bdb" />
+        </linearGradient>
+        <linearGradient id="gradSalt" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#bfe6d6" />
+          <stop offset="100%" stop-color="#6bb8a0" />
+        </linearGradient>
+        <linearGradient id="gradSlurry" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d5f0e2" />
+          <stop offset="100%" stop-color="#9ed4bd" />
+        </linearGradient>
+        <linearGradient id="gradBlue" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5b8def" />
+          <stop offset="100%" stop-color="#274bb0" />
+        </linearGradient>
+        <linearGradient id="gradGlass" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+          <stop offset="18%" stop-color="#ffffff" stop-opacity="0.05" />
+          <stop offset="82%" stop-color="#16364a" stop-opacity="0.10" />
+          <stop offset="100%" stop-color="#16364a" stop-opacity="0.28" />
+        </linearGradient>
+        <linearGradient id="gradMetal" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e9eef3" />
+          <stop offset="50%" stop-color="#b8c4cf" />
+          <stop offset="100%" stop-color="#8b9aa8" />
+        </linearGradient>
+        <pattern
+          id="patBeads"
+          x="0"
+          y="0"
+          width="22"
+          height="22"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect width="22" height="22" fill="#eaf6ef" />
+          <circle
+            cx="6"
+            cy="6"
+            r="6"
+            fill="#bfe3cd"
+            stroke="#9fd0b4"
+            stroke-width="0.6"
+          />
+          <circle
+            cx="17"
+            cy="13"
+            r="6"
+            fill="#c9e8d6"
+            stroke="#9fd0b4"
+            stroke-width="0.6"
+          />
+          <circle
+            cx="4"
+            cy="18"
+            r="5"
+            fill="#b6dfc6"
+            stroke="#9fd0b4"
+            stroke-width="0.6"
+          />
+          <circle cx="6" cy="6" r="1.7" fill="#eaf6ef" />
+          <circle cx="17" cy="13" r="1.7" fill="#eaf6ef" />
+          <circle cx="4" cy="18" r="1.5" fill="#eaf6ef" />
+        </pattern>
+        <pattern
+          id="patBeadsSm"
+          x="0"
+          y="0"
+          width="14"
+          height="14"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle cx="4" cy="4" r="3.2" fill="#7dc5a6" />
+          <circle cx="10" cy="9" r="3.2" fill="#8ccdb0" />
+        </pattern>
+        <radialGradient id="gradGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff6c2" />
+          <stop offset="55%" stop-color="#ffd34d" />
+          <stop offset="100%" stop-color="#ffd34d" stop-opacity="0" />
+        </radialGradient>
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow
+            dx="0"
+            dy="2"
+            stdDeviation="2.5"
+            flood-color="#0b2b3d"
+            flood-opacity="0.18"
+          />
+        </filter>
+        <marker
+          id="arrow"
+          viewBox="0 0 10 10"
+          refX="7"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--c-accent)" />
+        </marker>
+        <marker
+          id="arrowTan"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto"
+        >
+          <path d="M0,0 L10,5 L0,10 z" fill="#b98b52" />
+        </marker>
+        <marker
+          id="arrowBlue"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto"
+        >
+          <path d="M0,0 L10,5 L0,10 z" fill="#3a63c8" />
+        </marker>
+        <marker
+          id="arrowGrey"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="7"
+          markerHeight="7"
+          orient="auto"
+        >
+          <path d="M0,0 L10,5 L0,10 z" fill="#5a7686" />
+        </marker>
+      </defs>
+    </svg>
+
+    <!-- Add JS at the bottom of HTML file -->
+    <script src="./js/main.js"></script>
+  </body>
 </html>
