@@ -2,35 +2,171 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "Which chromatography technique is NOT partition chromatography?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Hydrophobic interaction chromatography",
+        "b": "Ion-exchange chromatography",
+        "c": "Bonded-phase liquid chromatography",
+        "d": "Affinity chromatography"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A chromatogram represents",
+      "answers": {
+        "a": "The elution pattern of an analyte during chromatography.",
+        "b": "The flow of salt during chromatography.",
+        "c": "The pattern of distribution coefficient of different analytes.",
+        "d": "Pattern of resolution power of column during chromatography."
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "The characteristic feature of any type of chromatography is related to type of",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Modified agarose matrix used.",
+        "b": "Water soluble compounds.",
+        "c": "Ioniser used to separate molecules.",
+        "d": "Interaction between analyte and stationary phase."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The 25 cm long ion-exchange chromatography column has individual distribution plane with a height of 0.025 mm. The number of theoretical plates present in the column is",
+      "answers": {
+        "a": "100000",
+        "b": "1000",
+        "c": "10000",
+        "d": "100"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Relation among column length (L), distribution plane height (H), and number of distribution planes (N) is best represented by",
+      "answers": {
+        "a": "L × H = N",
+        "b": "N × L = H",
+        "c": "N × H = L",
+        "d": "N − H = L"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The Kd values of A, B and C are 1, 9 and 5 respectively. The order of elution of A, B and C when passed through a packed cylindrical column is",
+      "answers": {
+        "a": "B → C → A",
+        "b": "A → C → B",
+        "c": "B → A → C",
+        "d": "C → A → B"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "If the length of a column is increased to twice of its original length and packed with the same material, the number of distribution planes (N) in the column will be",
+      "answers": {
+        "a": "Doubled",
+        "b": "Halved",
+        "c": "Unaffected",
+        "d": "Reduced by 75%"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The role of stationary phase in a column chromatography is",
+      "answers": {
+        "a": "It moves through the column with the mobile phase.",
+        "b": "It serves as a buffer for the analytes.",
+        "c": "It remains stationary and interacts with analytes.",
+        "d": "It evaporates during the process."
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The overlapping peaks in a chromatogram indicates",
+      "answers": {
+        "a": "Complete separation of analytes.",
+        "b": "Poor separation of analytes.",
+        "c": "High resolution.",
+        "d": "Short retention time."
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The 100 ml of aqueous extract of neem leaves contain 5 g of compound 'X'. The compound 'X' is fractionated from the extract in 30 ml dichloromethane using a separating funnel. At the end of fractionation, 20% of the compound 'X' is present in the dichloromethane layer. Based on the given information, calculate the distribution coefficient (Kd) of 'X' for water (phase A) and dichloromethane (phase B).",
+      "answers": {
+        "a": "0.12",
+        "b": "4",
+        "c": "1.2",
+        "d": "0.25"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
