@@ -136,3 +136,24 @@ Molecular weight of unknown protein = **17.579 kDa**
 Oligomeric Status (n)=17.57 ÷ 18 = **0.97**
 
 Oligomeric status (n) is a whole number so oligomeric status of the protein is monomer.
+
+---
+
+## Video Demonstration
+
+<table>
+  <tr>
+    <td>
+      <a href="https://www.youtube.com/watch?v=181idpJ33n4">
+        <img src="https://img.youtube.com/vi/181idpJ33n4/maxresdefault.jpg" width="400">
+      </a>
+      Determination of denatured molecular weight
+    </td>
+    <td>
+      <a href="https://www.youtube.com/watch?v=16D3BQOIPuM">
+        <img src="https://img.youtube.com/vi/16D3BQOIPuM/maxresdefault.jpg" width="400">
+      </a>
+      Determination of native molecular weight
+    </td>
+  </tr>
+</table>
