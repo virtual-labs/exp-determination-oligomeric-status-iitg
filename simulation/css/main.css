@@ -1,0 +1,1162 @@
+/* ================================================================
+   Gel Permeation Chromatography — Virtual Lab
+   styles.css
+   ----------------------------------------------------------------
+   Layout, theming and CSS-driven animations.  Anything that the JS
+   needs to read (durations, colours) is exposed as a CSS variable so
+   values are not duplicated / hard-coded in two places.
+   ================================================================ */
+
+/* ---------- design tokens ---------- */
+:root {
+  --c-bg: #eef3f7;
+  --c-bg-panel: #ffffff;
+  --c-ink: #16323f;
+  --c-ink-soft: #5a7080;
+  --c-accent: #2f9bdb;
+  --c-accent-dark: #1d6fa5;
+  --c-large: #2f6fdb; /* large molecules (blue)        */
+  --c-normal: #2faf6b; /* intermediate molecules (green) */
+  --c-small: #e0533b; /* small molecules (red)         */
+  --c-ok: #2faf6b;
+  --c-warn: #e0a32e;
+  --c-line: #d4dde4;
+  --c-shadow: 0 6px 22px rgba(11, 43, 61, 0.12);
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* animation timing shared with JS (see CONFIG.css mirror) */
+  --flow-dash-speed: 1.1s;
+  --pulse-speed: 1.6s;
+
+  --font:
+    "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font);
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px clamp(10px, 2.5vw, 26px) 18px;
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.app-header__title {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+  letter-spacing: 0.2px;
+  color: var(--c-ink);
+}
+
+/* ================================================================
+   TOP-LEVEL STEP NAVIGATION  (the three lab steps)
+   ================================================================ */
+.step-nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.step-tab {
+  flex: 1 1 0;
+  min-width: 190px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+  text-align: left;
+  background: var(--c-bg-panel);
+  border: 1px solid #dbe4ea;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--c-ink-soft);
+  box-shadow: var(--c-shadow);
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    transform 0.1s,
+    background 0.15s;
+}
+.step-tab:hover {
+  transform: translateY(-1px);
+  border-color: var(--c-accent);
+}
+.step-tab__num {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 50%;
+  background: #e3edf3;
+  color: var(--c-ink-soft);
+  font-weight: 800;
+  font-size: 1.05rem;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.step-tab__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.step-tab__text b {
+  font-size: 0.95rem;
+  color: var(--c-ink);
+}
+.step-tab__text small {
+  font-size: 0.72rem;
+  color: var(--c-ink-soft);
+}
+.step-tab.is-active {
+  border-color: var(--step-color, var(--c-accent));
+  background: var(--step-faint, #eaf5fd);
+}
+.step-tab.is-active .step-tab__num {
+  background: var(--step-color, var(--c-accent));
+  color: #fff;
+}
+.step-tab.is-active .step-tab__text b {
+  color: var(--step-color, var(--c-accent-dark));
+}
+.step-tab.is-done .step-tab__num {
+  background: var(--c-ok);
+  color: #fff;
+}
+
+/* ================================================================
+   STEP-2 SUB NAVIGATION  (2.1 – 2.5)
+   ================================================================ */
+.sub-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  background: var(--step-faint, #e7eef4);
+}
+.sub-nav[hidden] {
+  display: none;
+}
+.sub-tab {
+  flex: 1 1 0;
+  min-width: 120px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 7px 10px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+.sub-tab b {
+  color: var(--step-color, var(--c-accent-dark));
+  margin-right: 3px;
+}
+.sub-tab:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.sub-tab.is-active {
+  background: #fff;
+  color: var(--c-ink);
+  box-shadow: var(--c-shadow);
+  border-color: var(--step-color, var(--c-accent));
+}
+.sub-tab.is-done b::after {
+  content: " ✓";
+  color: var(--c-ok);
+}
+
+/* ================================================================
+   PROGRESS BAR
+   ================================================================ */
+.progress {
+  position: relative;
+  height: 12px;
+  background: #dfe7ec;
+  border-radius: 999px;
+  overflow: visible;
+}
+.progress__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--step-color, var(--c-accent));
+  transition: width 0.25s ease;
+}
+.progress__ticks {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.progress__ticks li {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #c4d0d8;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.25s;
+  cursor: pointer;
+}
+.progress__ticks li.is-done {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+}
+.progress__ticks li.is-active {
+  background: #fff;
+  border-color: var(--c-accent-dark);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px rgba(47, 155, 219, 0.2);
+}
+
+/* ================================================================
+   WORKBENCH LAYOUT
+   ================================================================ */
+.workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.95fr);
+  gap: 14px;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* the stack holds all four scenes; only the active one is shown */
+.scene-stack {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+.scene {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(
+    120% 90% at 50% 0%,
+    #ffffff 0%,
+    #eaf1f6 60%,
+    #e2ebf1 100%
+  );
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  padding: 8px;
+  min-height: 360px;
+  display: flex;
+}
+.scene[hidden] {
+  display: none;
+}
+.lab-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- panels column ---------- */
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.panel {
+  background: var(--c-bg-panel);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  padding: 12px 14px;
+}
+.panel__title {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--c-ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel__icon {
+  font-size: 1rem;
+}
+.panel--instructions {
+  border-left: 4px solid var(--c-accent);
+}
+.panel__step {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.panel--chart .chart {
+  width: 100%;
+  height: auto;
+}
+.panel--chart[hidden] {
+  display: none;
+}
+.chart-caption {
+  margin: -2px 0 6px;
+  font-size: 0.78rem;
+  color: var(--c-ink-soft);
+  font-style: italic;
+}
+.panel--observation {
+  flex: 1;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* call-to-action hint button — polygon "proceed" tag with a strong fill + border */
+.action-hint {
+  margin-top: 12px;
+  width: 100%;
+  border: none;
+  background: var(--step-color, var(--c-accent));
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.92rem;
+  letter-spacing: 0.2px;
+  padding: 12px 22px;
+  text-align: center;
+  cursor: pointer;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 15px) 0,
+    100% 50%,
+    calc(100% - 15px) 100%,
+    0 100%
+  );
+  filter: drop-shadow(2px 0 0 rgba(12, 26, 48, 0.8))
+    drop-shadow(-2px 0 0 rgba(12, 26, 48, 0.8))
+    drop-shadow(0 2px 0 rgba(12, 26, 48, 0.8))
+    drop-shadow(0 -2px 0 rgba(12, 26, 48, 0.8));
+  animation: softPulse var(--pulse-speed) ease-in-out infinite;
+}
+.action-hint:hover {
+  filter: drop-shadow(2px 0 0 rgba(12, 26, 48, 0.95))
+    drop-shadow(-2px 0 0 rgba(12, 26, 48, 0.95))
+    drop-shadow(0 2px 0 rgba(12, 26, 48, 0.95))
+    drop-shadow(0 -2px 0 rgba(12, 26, 48, 0.95)) brightness(1.07);
+}
+
+/* ================================================================
+   CHROMATOGRAM
+   ================================================================ */
+.chart-axis {
+  stroke: #b9c6cf;
+  stroke-width: 1.4;
+}
+.chart-grid-line {
+  stroke: #eef3f6;
+  stroke-width: 1;
+}
+.chart-area {
+  opacity: 0.22;
+  stroke: none;
+}
+.chart-area--large {
+  fill: var(--c-large);
+}
+.chart-area--normal {
+  fill: var(--c-normal);
+}
+.chart-area--small {
+  fill: var(--c-small);
+}
+.chart-trace {
+  fill: none;
+  stroke: #28506e;
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart-cursor {
+  stroke: var(--c-warn);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 3;
+  opacity: 0.8;
+}
+.chart-label {
+  font-size: 9px;
+  fill: var(--c-ink-soft);
+}
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 4px;
+  font-size: 0.76rem;
+  color: var(--c-ink-soft);
+}
+.chart-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: -1px;
+}
+.dot--large {
+  background: var(--c-large);
+}
+.dot--normal {
+  background: var(--c-normal);
+}
+.dot--small {
+  background: var(--c-small);
+}
+
+/* ================================================================
+   OBSERVATION LOG
+   ================================================================ */
+.observation-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.86rem;
+}
+.observation-log li {
+  padding: 7px 10px;
+  background: #f4f8fb;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--c-accent);
+  animation: fadeSlide 0.35s ease;
+}
+.observation-log li .ts {
+  color: var(--c-ink-soft);
+  font-variant-numeric: tabular-nums;
+  margin-right: 6px;
+  font-size: 0.78rem;
+}
+.observation-log li.is-warn {
+  border-left-color: var(--c-warn);
+  background: #fff7e8;
+}
+.observation-log li.is-ok {
+  border-left-color: var(--c-ok);
+  background: #ecf9f1;
+}
+
+/* ================================================================
+   CONTROL DOCK
+   ================================================================ */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: var(--c-bg-panel);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  padding: 10px 16px;
+}
+.controls__group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--c-ink);
+  background: #eef3f7;
+  border: 1px solid #d3dde4;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    background 0.15s,
+    box-shadow 0.15s,
+    opacity 0.15s;
+}
+.btn:hover:not(:disabled) {
+  background: #e3edf3;
+  transform: translateY(-1px);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+.btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.btn--primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #fff;
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--c-accent-dark);
+}
+.btn--ghost {
+  background: transparent;
+}
+.btn.is-suggested {
+  animation: softPulse var(--pulse-speed) ease-in-out infinite;
+  box-shadow: 0 0 0 3px rgba(47, 155, 219, 0.25);
+}
+
+.controls__speed-label {
+  font-size: 0.82rem;
+  color: var(--c-ink-soft);
+  font-weight: 600;
+}
+.controls__speed-out {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  min-width: 38px;
+  color: var(--c-accent-dark);
+}
+#speed {
+  accent-color: var(--c-accent);
+  cursor: pointer;
+}
+
+/* ================================================================
+   SVG APPARATUS — shared interaction states
+   ================================================================ */
+.apparatus {
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.apparatus:hover {
+  filter: brightness(1.04) drop-shadow(0 0 4px rgba(47, 155, 219, 0.5));
+}
+.apparatus:focus {
+  outline: none;
+}
+.apparatus:focus-visible {
+  outline: 2px dashed var(--c-accent-dark);
+  outline-offset: 2px;
+}
+
+/* the next required apparatus pulses to guide the user */
+.apparatus.is-target {
+  animation: targetPulse var(--pulse-speed) ease-in-out infinite;
+}
+
+.svg-label {
+  font: 600 12px var(--font);
+  fill: var(--c-ink);
+}
+.svg-tag {
+  font: 700 12px var(--font);
+  fill: #6a8a76;
+}
+.svg-watermark {
+  font: 600 12px var(--font);
+  fill: #c2cfd8;
+  letter-spacing: 0.5px;
+}
+
+/* result / storage cards inside the scenes */
+.result-title {
+  font: 700 12px var(--font);
+  fill: #9fe0ff;
+}
+.result-line {
+  font: 500 12px var(--font);
+  fill: #eaf4fb;
+}
+.result-ok {
+  font: 700 12px var(--font);
+  fill: #7ee6a8;
+}
+.store-line {
+  font: 600 12px var(--font);
+  fill: var(--c-ink);
+}
+
+/* pouring slurry stream (phase 1) — id-specificity so it beats .tube-flow */
+#p1Pour.pour-stream {
+  stroke: #9ed4bd;
+  stroke-width: 9;
+  stroke-dasharray: 3 9;
+}
+
+/* smooth level animations for the beakers / tubes in the new scenes */
+#p1Bed,
+#p1Liquid,
+#p1WasteLiquid,
+#p1Slurry,
+#p1SlurrySurf,
+#p2VialLiquid,
+#p2Filtrate,
+#p2LoadSample,
+#p2BarrelSample,
+#p4Liquid,
+#p4WasteLiquid {
+  transition:
+    y 0.25s ease,
+    height 0.25s ease,
+    opacity 0.25s ease;
+}
+#p4Fridge,
+#p4Cap,
+#p1Result,
+#p2LoadSyringe {
+  transition: opacity 0.4s ease;
+}
+
+/* test-tube liquid uses a transition so fills animate smoothly */
+.tube-liquid {
+  transition:
+    height 0.3s ease,
+    y 0.3s ease;
+}
+.tube-active rect.tube-glass {
+  stroke: var(--c-accent-dark);
+}
+
+/* ================================================================
+   FLUID FLOW IN TUBING
+   ================================================================ */
+.tube-base {
+  fill: none;
+  stroke: #cdd9e1;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+.tube-flow {
+  fill: none;
+  stroke: var(--c-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 2 12;
+  opacity: 0; /* hidden until flow is active */
+  transition: opacity 0.3s;
+}
+.tubing.is-flowing .tube-flow {
+  opacity: 0.95;
+  animation: flowDash var(--flow-dash-speed) linear infinite;
+}
+
+/* ================================================================
+   KEYFRAMES
+   ================================================================ */
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+@keyframes softPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes targetPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(47, 155, 219, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 7px rgba(47, 155, 219, 0.95));
+  }
+}
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* pump rotor spin (paused/played via .is-spinning) */
+#pumpRotor {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.is-spinning #pumpRotor {
+  animation: spin 0.9s linear infinite;
+}
+
+/* ================================================================
+   TOOLTIP
+   ================================================================ */
+.tooltip {
+  position: absolute;
+  max-width: 230px;
+  background: #0f2c3c;
+  color: #eaf4fb;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 9px 11px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(8, 30, 42, 0.32);
+  pointer-events: none;
+  z-index: 20;
+  transform: translate(-50%, -100%);
+  transition: opacity 0.12s;
+}
+.tooltip strong {
+  display: block;
+  margin-bottom: 3px;
+  color: #9fe0ff;
+  font-size: 0.85rem;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  border: 6px solid transparent;
+  border-top-color: #0f2c3c;
+  transform: translateX(-50%);
+}
+
+/* ================================================================
+   RUNNING-SAMPLE CHIP (step 2.3)
+   ================================================================ */
+.run-chip-text {
+  font: 700 15px var(--font);
+  fill: #eaf4fb;
+}
+#runChip {
+  transition: opacity 0.3s;
+}
+
+/* ================================================================
+   CALIBRATION GRAPH + FORMULAS (step 2.4)
+   ================================================================ */
+.det-wrap {
+  width: 100%;
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.calib {
+  flex: 1 1 340px;
+  min-width: 300px;
+  height: auto;
+  align-self: center;
+}
+.calib-title {
+  font: 700 15px var(--font);
+  fill: var(--c-ink);
+}
+.calib-grid-line {
+  stroke: #eef3f6;
+  stroke-width: 1;
+}
+.calib-tick {
+  font: 500 11px var(--font);
+  fill: var(--c-ink-soft);
+}
+.calib-line {
+  stroke: var(--c-accent-dark);
+  stroke-width: 2.4;
+  fill: none;
+}
+.calib-pt {
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+.calib-pt-label {
+  font: 600 11px var(--font);
+  fill: var(--c-ink);
+}
+.calib-guide {
+  stroke: var(--c-small);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 4;
+}
+.calib-unknown-ring {
+  fill: none;
+  stroke: var(--c-small);
+  stroke-width: 2.2;
+}
+
+.det-formulas {
+  flex: 1 1 260px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* reusable formula card + fraction rendering */
+.formula-card {
+  background: var(--c-bg-panel);
+  border: 1px solid #e0e8ee;
+  border-left: 4px solid var(--c-accent);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  box-shadow: var(--c-shadow);
+  opacity: 0.35;
+  transition: opacity 0.4s;
+}
+.formula-card.is-on {
+  opacity: 1;
+}
+.formula-card h3 {
+  margin: 0 0 6px;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--c-ink-soft);
+}
+.formula-card .eq {
+  font-size: 1rem;
+  color: var(--c-ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.formula-card .eq .var {
+  font-style: italic;
+}
+.formula-card .res {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--c-accent-dark);
+  font-weight: 700;
+}
+.formula-card.is-result {
+  border-left-color: var(--c-ok);
+}
+.formula-card.is-result .res {
+  color: var(--c-ok);
+}
+
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.frac .num {
+  padding: 0 6px 2px;
+  border-bottom: 1.6px solid currentColor;
+}
+.frac .den {
+  padding: 2px 6px 0;
+}
+
+/* ================================================================
+   PLACEHOLDER (step 1) + FORMULA STAGE (step 3)
+   ================================================================ */
+.placeholder-stage,
+.formula-stage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.placeholder-card {
+  max-width: 460px;
+  text-align: center;
+  background: var(--c-bg-panel);
+  border: 2px dashed #cdd9e2;
+  border-radius: var(--radius);
+  padding: 30px 28px;
+  box-shadow: var(--c-shadow);
+}
+.placeholder-icon {
+  font-size: 3rem;
+}
+.placeholder-card h2 {
+  margin: 8px 0 10px;
+  color: var(--c-accent-dark);
+}
+.placeholder-card p {
+  margin: 6px 0;
+  color: var(--c-ink);
+  line-height: 1.5;
+}
+.placeholder-note {
+  font-size: 0.85rem;
+  color: var(--c-ink-soft);
+}
+
+.formula-stage .big-formula {
+  max-width: 560px;
+  width: 100%;
+  background: var(--c-bg-panel);
+  border-radius: var(--radius);
+  box-shadow: var(--c-shadow);
+  padding: 26px 30px;
+  border-top: 5px solid var(--c-accent);
+}
+.formula-stage h2 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: var(--c-ink);
+}
+.formula-stage .sub {
+  margin: 0 0 18px;
+  color: var(--c-ink-soft);
+  font-size: 0.9rem;
+}
+.big-eq {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 1.5rem;
+  color: var(--c-ink);
+  margin: 14px 0 18px;
+}
+.big-eq .var {
+  font-style: italic;
+}
+.big-eq .frac .num,
+.big-eq .frac .den {
+  padding: 2px 12px;
+}
+.plug-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 8px 0;
+}
+.plug {
+  background: #eef5fa;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.plug b {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--c-accent-dark);
+}
+.plug small {
+  color: var(--c-ink-soft);
+}
+.verdict {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--c-ok);
+  background: #ecf9f1;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+.verdict small {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  margin-top: 3px;
+}
+
+/* transport disabled for static (non-animated) steps */
+.controls.is-static .controls__group--transport {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.progress.is-hidden {
+  visibility: hidden;
+}
+
+/* ================================================================
+   STEP 1 — SDS-PAGE
+   ================================================================ */
+/* 1.1 sample prep — smooth level / opacity animations */
+#sdsLiquid,
+#sdsPellet,
+#sdsReady,
+#sdsHeat,
+#sdsSpin,
+#sdsArrowA,
+#sdsArrowB {
+  transition:
+    opacity 0.35s ease,
+    height 0.3s ease,
+    y 0.3s ease;
+}
+.heat-readout {
+  font: 700 18px var(--font);
+  fill: #ff6a4d;
+  letter-spacing: 0.5px;
+}
+
+/* heat shimmer */
+#sdsHeatWaves {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#sdsHeat.is-heating #sdsHeatWaves {
+  opacity: 1;
+  animation: heatRise 1s ease-in-out infinite;
+}
+@keyframes heatRise {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* centrifuge spin arcs */
+#sdsSpin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+#sdsSpin.is-spinning {
+  animation: spin 0.7s linear infinite;
+}
+
+/* 1.2 gel (standalone, centred) */
+.sds-gel {
+  width: auto;
+  max-width: 340px;
+  max-height: 74vh;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+.gel-electrode {
+  font: 700 12px var(--font);
+  fill: var(--c-ink-soft);
+}
+.gel-lane-label {
+  font: 600 12px var(--font);
+  fill: var(--c-ink);
+}
+.gel-dye {
+  stroke: #4a5cc4;
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.gel-volt-text {
+  font: 700 11px var(--font);
+  fill: #eaf4fb;
+}
+.gel-band {
+  transition: y 0.12s linear;
+}
+.gel-band-label {
+  font: 600 10px var(--font);
+  fill: var(--c-ink-soft);
+}
+
+/* Rf calibration graph shares the .calib styles */
+.rf-guide {
+  stroke: var(--c-small);
+  stroke-width: 1.4;
+  stroke-dasharray: 4 4;
+}
+.calib-star {
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 880px) {
+  .workbench {
+    grid-template-columns: 1fr;
+  }
+  .panels {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .panel {
+    flex: 1 1 240px;
+  }
+  .stage-indicator {
+    align-items: flex-start;
+  }
+}
+@media (max-width: 560px) {
+  .controls {
+    justify-content: center;
+  }
+  .controls__group--transport {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+  }
+  .app-header {
+    justify-content: center;
+    text-align: center;
+  }
+  .app-header__brand {
+    flex-direction: column;
+  }
+}
+
+/* reduced-motion: stop decorative loops */
+@media (prefers-reduced-motion: reduce) {
+  .action-hint,
+  .btn.is-suggested,
+  .apparatus.is-target,
+  .is-spinning #pumpRotor,
+  .tubing.is-flowing .tube-flow {
+    animation: none;
+  }
+}
