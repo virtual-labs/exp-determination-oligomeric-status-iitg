@@ -1,5 +1,3 @@
-### Procedure
-
 ### A. Determination of Sub-unit Molecular weight of given protein by SDS-PAGE
 
 **Sample Analysis by SDS-PAGE:** Sample was resolved on SDS-PAGE as described below. Different components of SDS-PAGE are given in Figure 2.

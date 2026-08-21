@@ -1,5 +1,3 @@
-### Theory
-
 This chromatography distributes the protein or analyte, based on their size by passing through a porous beads. The first report in 1955 described performing a chromatography column with swollen gel of maize starch to separate the protein based on their size. ‘Porath and Floidin’coined the term “gel filtration” for this chromatography technique separating the analytes based on molecular sizes. Since then the chromatography technique evolved in terms of developed of different sizes beads to separate protein of narrow range, as well as performing the technique in aqueous and non-aqueous mobile phase. The beads used in gel filtration chromatography is made up of cross linked material (such as dextran in sephadex) to form a 3-D mesh. These 3-D mesh swell in the mobile phase to develop pores of different sizes (Figure 1). The extent of cross linking controls the pores size within the gel beads.
 
 ![Figure 1](images/image.png)
