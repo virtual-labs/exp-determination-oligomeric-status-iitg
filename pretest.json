@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Which chromatography technique is NOT partition chromatography?",
+      "answers": {
+        "a": "Hydrophobic interaction chromatography",
+        "b": "Ion-exchange chromatography",
+        "c": "Bonded-phase liquid chromatography",
+        "d": "Affinity chromatography"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A chromatogram represents",
+      "answers": {
+        "a": "The elution pattern of an analyte during chromatography",
+        "b": "The flow of salt during chromatography",
+        "c": "The pattern of distribution coefficient of different analytes",
+        "d": "The resolution power of a column"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The characteristic feature of any type of chromatography is related to the type of",
+      "answers": {
+        "a": "Modified agarose matrix used",
+        "b": "Water-soluble compounds",
+        "c": "Ioniser used to separate molecules",
+        "d": "Interaction between analyte and stationary phase"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "If a column is doubled in length and packed with the same material, the number of distribution planes (N) will be",
+      "answers": {
+        "a": "Doubled",
+        "b": "Halved",
+        "c": "Unaffected",
+        "d": "Reduced by 75%"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is meant by the oligomeric status of a protein?",
+      "answers": {
+        "a": "Amino acid sequence of a protein",
+        "b": "Number of polypeptide subunits in a protein complex",
+        "c": "Number of peptide bonds in a protein",
+        "d": "Shape of a single amino acid"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A protein consisting of two polypeptide subunits is called:",
+      "answers": {
+        "a": "Monomer",
+        "b": "Dimer",
+        "c": "Trimer",
+        "d": "Tetramer"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which technique separates protein subunits according to molecular weight under denaturing conditions?",
+      "answers": {
+        "a": "Native PAGE",
+        "b": "SDS-PAGE",
+        "c": "Gel filtration",
+        "d": "Affinity chromatography"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A protein has a native molecular weight of 200 kDa and a subunit molecular weight of 50 kDa. What is its oligomeric status?",
+      "answers": {
+        "a": "Monomer",
+        "b": "Dimer",
+        "c": "Trimer",
+        "d": "Tetramer"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which reagent is commonly used to denature proteins during SDS-PAGE?",
+      "answers": {
+        "a": "Sodium dodecyl sulfate (SDS)",
+        "b": "Tris-HCl",
+        "c": "Phosphate buffer",
+        "d": "Sodium chloride"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In size-exclusion chromatography, which protein generally elutes first?",
+      "answers": {
+        "a": "Smaller protein",
+        "b": "Larger protein",
+        "c": "Protein with lower molecular weight",
+        "d": "Protein with greater pore accessibility"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    }
+  ]
+}

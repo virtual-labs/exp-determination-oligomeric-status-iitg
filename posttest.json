@@ -1,0 +1,175 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Gel filtration utilizes the _________ of a protein.",
+      "answers": {
+        "a": "Charge",
+        "b": "Surface area",
+        "c": "Hydrophobicity",
+        "d": "Affinity"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Four proteins A, B, C and D are of 5 nm, 2 nm, 10 nm and 7 nm in diameter. When loaded into a gel filtration column having pore size of 5 nm,",
+      "answers": {
+        "a": "B will elute first.",
+        "b": "C will elute at last.",
+        "c": "C and D will be excluded from the column.",
+        "d": "A and B will not enter the beads."
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The molecular weight of a protein is found to be 120 kDa in gel filtration chromatography. The same protein when analysed with SDS-PAGE gave a molecular weight of 40 kDa. The oligomeric status of the protein is",
+      "answers": {
+        "a": "Tetramer",
+        "b": "Trimer",
+        "c": "Dimer",
+        "d": "Monomer"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "A purified protein sample has high amount of salt. The protein can be separated from the salt by gel filtration chromatography as",
+      "answers": {
+        "a": "The salt elutes in the void volume.",
+        "b": "The protein elutes after the salt.",
+        "c": "The salt elutes after the protein.",
+        "d": "The salt binds irreversibly into the matrix."
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The void volume of a gel filtration column is determined by analyzing",
+      "answers": {
+        "a": "Blue dextran",
+        "b": "Rubisco",
+        "c": "Glucose",
+        "d": "Acetone"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The relationship between elution volume (Ve), void volume (Vo), pore volume (Vi) and distribution coefficient (Kd) is given by",
+      "answers": {
+        "a": "Kd = Vi / (Ve − Vo)",
+        "b": "Kd = Vi / (Vo − Ve)",
+        "c": "Kd = (Ve − Vo) / Vi",
+        "d": "Kd = (Vo − Ve) / Vi"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In gel filtration chromatography, the elution volume (Ve) of an analyte with distribution coefficient Kd = 1 is",
+      "answers": {
+        "a": "Vo + Vi",
+        "b": "Vo − Vi",
+        "c": "Vi − Vo",
+        "d": "Vi × Vo"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The analyte will be completely excluded from the gel filtration column when the distribution coefficient Kd is",
+      "answers": {
+        "a": "0",
+        "b": "1",
+        "c": "20",
+        "d": "0.5"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "The mixture of proteins given below were analyzed on a gel filtration column: Urease (pI = 5.1, molecular weight = 482.7 kDa), Catalase (pI = 5.6, molecular weight = 242.5 kDa), Lactoglobin (pI = 5.2, molecular weight = 37.1 kDa), and Hemoglobin (pI = 6.9, molecular weight = 64.5 kDa). Which protein will elute first from the column?",
+      "answers": {
+        "a": "Urease",
+        "b": "Catalase",
+        "c": "IgA",
+        "d": "Hemoglobin"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Separation of proteins by gel filtration (SEC) chromatography is based on",
+      "answers": {
+        "a": "Isoelectric points of proteins",
+        "b": "The solubility of proteins",
+        "c": "Hydrodynamic volume of proteins",
+        "d": "The net charge of the protein"
+      },
+      "explanations": {
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": ""
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    }
+  ]
+}

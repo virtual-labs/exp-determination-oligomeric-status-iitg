@@ -1,0 +1,10 @@
+
+/home/runner/work/exp-determination-oligomeric-status-iitg/exp-determination-oligomeric-status-iitg/experiment/simulation/js/main.js
+    61:7   warning  'fmtClock' is assigned a value but never used    no-unused-vars
+   580:9   warning  'testReveal' is assigned a value but never used  no-unused-vars
+  1314:21  warning  's' is assigned a value but never used           no-unused-vars
+  1355:7   warning  'RegenerationPhase' is defined but never used    no-unused-vars
+  1877:21  warning  's' is assigned a value but never used           no-unused-vars
+
+✖ 5 problems (0 errors, 5 warnings)
+
