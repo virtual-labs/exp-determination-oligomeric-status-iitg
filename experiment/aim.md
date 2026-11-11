@@ -1,3 +1,3 @@
-- Preparation and packing of Size exclusion chromatography column.
+- Demonstrate the step-by-step procedure to prepare and pack the gel matrix into the chromatography column.
 
-- Determination of Oligomeric status of the given protein by Gel Filtration Chromatography.
+- Describe how gel filtration separates proteins based on size and how this helps determine oligomeric status.

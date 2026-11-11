@@ -55,3 +55,49 @@ K<sub>d</sub> is the ratio of inner volume available for an analyte and it is in
 | 5    | Sephadex G200      |                 5,000–600,000 |
 | 6    | Sepharose 4B       |             60,000–20,000,000 |
 | 7    | Sepharose 6B       |              10,000–4,000,000 |
+
+### Protein oligomeric status
+
+Proteins are biological macromolecules composed of one or more polypeptide chains. Based on the number of polypeptide subunits present in their functional structure, proteins can be classified as monomeric, dimeric, trimeric, tetrameric, or higher-order oligomeric proteins.
+
+The term protein oligomeric status refers to the number and arrangement of individual polypeptide subunits that associate to form a functional protein complex.
+
+For example:
+
+Monomer: Consists of a single polypeptide chain.
+
+Dimer: Consists of two associated polypeptide chains.
+
+Trimer: Consists of three polypeptide chains.
+
+Tetramer: Consists of four polypeptide chains.
+
+Multimer: Consists of several polypeptide subunits.
+
+Oligomerization may be important for protein stability, biological activity, regulation, and molecular recognition.
+
+The oligomeric status of a protein can be determined by comparing its molecular weight under native and denaturing conditions.
+
+Under native conditions, the protein retains its folded structure and subunit interactions. Techniques such as size-exclusion chromatography (SEC), native PAGE, and analytical ultracentrifugation can be used to estimate the molecular mass of the intact protein complex.
+
+Under denaturing conditions, such as SDS-PAGE, non-covalent interactions between protein subunits are disrupted, and individual polypeptide chains are separated according to their molecular weight.
+
+By comparing the molecular weight of the intact protein complex with that of its individual polypeptide subunits, the oligomeric status can be estimated.
+
+### Methods for determining protein oligomeric status
+
+1. Size-Exclusion Chromatography (SEC)
+
+Separates proteins based on their hydrodynamic size. Larger protein complexes generally elute earlier than smaller proteins. The elution volume can be compared with molecular-weight standards to estimate the native protein size.
+
+2. Native PAGE
+
+Separates proteins while maintaining much of their native structure and subunit interactions. Migration depends on molecular size, charge, and shape.
+
+3. SDS-PAGE
+
+Denatures proteins and separates their polypeptide subunits according to molecular weight. The subunit molecular weight is estimated using protein molecular-weight markers.
+
+4. Analytical Ultracentrifugation (AUC)
+
+Determines protein molecular mass and association behaviour by analysing sedimentation under high centrifugal force.
